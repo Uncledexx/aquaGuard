@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Water Monitor</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="app">
+
+<h1>Smart Water Monitor</h1>
+
+<div class="gauge">
+<div class="wave" id="wave"></div>
+<div class="percentage" id="percent">0%</div>
+</div>
+
+<div id="status">Waiting for data...</div>
+
+<h2>Recent Alerts (≥80%)</h2>
+
+<table id="alertsTable">
+<tr>
+<th>Water Level</th>
+<th>Timestamp</th>
+</tr>
+
+{% for alert in recent_alerts %}
+<tr>
+<td>{{ alert.level }}%</td>
+<td>{{ alert.time }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<audio id="alarm" src="{{ url_for('static', filename='warning.mp3') }}"></audio>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
